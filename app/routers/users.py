@@ -24,6 +24,12 @@ def create_users(user: CreateUser, db: Session = Depends(get_db)):
     hashed_password = hash(user.password)
     user.password = hashed_password
 
+    email = db.query(models.User).filter(models.User.email == user.email).first()
+    
+    if email: 
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"User with email id: {user.email} already exists")
+
     new_user = models.User(**user.dict())
 
     db.add(new_user)
@@ -38,7 +44,7 @@ def get_user(id: int, db: Session = Depends(get_db)):
     user = db.query(models.User).filter(models.User.id == id).first()
 
     if not user: 
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                             detail=f"User with id: {id} does not exists")
 
     return user
