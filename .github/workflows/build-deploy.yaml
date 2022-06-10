@@ -116,4 +116,4 @@ jobs:
         run: |
           TEMP=$(mktemp)
           echo "${{ secrets.PROD_KEY }}" > $TEMP
-          ssh -o 'StrictHostKeyChecking no' -i $TEMP ${{ secrets.PROD_USERNAME }}@${{ secrets.PROD_HOST}} 
+          echo ${{ secrets.PROD_PASSWORD }} | sudo -S ssh -o 'StrictHostKeyChecking no' -i $TEMP ${{ secrets.PROD_USERNAME }}@${{ secrets.PROD_HOST}} 
