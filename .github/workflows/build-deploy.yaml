@@ -105,7 +105,6 @@ jobs:
         with:
           host: ${{ secrets.PROD_HOST}}
           username: ${{ secrets.PROD_USERNAME }}
-          # password: ${{ secrets.PROD_PASSWORD }}
           key: ${{ secrets.PROD_KEY }}
           passphrase: ${{ secrets.PROD_KEY_PASSPHRASE }}
           script: |
