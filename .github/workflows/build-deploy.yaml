@@ -107,6 +107,7 @@ jobs:
           username: ${{ secrets.PROD_USERNAME }}
           # password: ${{ secrets.PROD_PASSWORD }}
           key: ${{ secrets.PROD_KEY }}
+          passphrase: ${{ secrets.PROD_KEY_PASSPHRASE }}
           script: |
             cd home/fastapi/fastapi-app/src
             git pull
