@@ -112,8 +112,17 @@ jobs:
       #       cd home/fastapi/fastapi-app/src
       #       git pull
       #       echo ${{ secrets.PROD_PASSWORD }} | sudo -S systemctl restart api
-      - name: Deploy on Ubuntu Server
-        run: |
-          TEMP=$(mktemp)
-          echo "${{ secrets.PROD_KEY }}" > $TEMP
-          echo ${{ secrets.PROD_PASSWORD }} | sudo -S ssh -o 'StrictHostKeyChecking no' -i $TEMP ${{ secrets.PROD_USERNAME }}@${{ secrets.PROD_HOST}} 
+      # - name: Deploy on Ubuntu Server
+      #   run: |
+      #     TEMP=$(mktemp)
+      #     echo "${{ secrets.PROD_KEY }}" > $TEMP
+      #     echo ${{ secrets.PROD_PASSWORD }} | sudo -S ssh -o 'StrictHostKeyChecking no' -i $TEMP ${{ secrets.PROD_USERNAME }}@${{ secrets.PROD_HOST}}
+
+      - name: Deploy to Server 1
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.PROD_KEY }}
+          REMOTE_HOST: ${{ secrets.PROD_HOST_DNS }}
+          REMOTE_USER: ${{ secrets.PROD_USERNAME }}
+          TARGET: ${{ secrets.TARGET_DIR }}
+ 
