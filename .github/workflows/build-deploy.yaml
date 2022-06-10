@@ -10,6 +10,16 @@ name: Build and Deploy Code
 
 on: [push, pull_request]
 
+env:
+  DATABASE_HOSTNAME=localhost
+  DATABASE_PORT=5432
+  DATABASE_USERNAME=postgres
+  DATABASE_PASSWORD=postgres
+  DATABASE_NAME=fastapi
+  SECRET_KEY_FASTAPI=feead84a0e7534a88155631e682b0df77bd491f8423c851046aaa678bc362c99
+  ALGORITHM=HS256
+  ACCESS_TOKEN_EXPIRE_MINUTES=300
+
 jobs:
   job1:
     runs-on: ubuntu-latest
