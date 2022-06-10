@@ -84,14 +84,29 @@ jobs:
     steps:
       - name: pull github repo
         uses: actions/checkout@v2
+      #pull our github repo
+      #install Heroku CLI
+      #Do Heroku login
+      #Add git remote for heroku
+      #git push heroku main
       - name: deplpying to heroku
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APPNAME}} #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-        #pull our github repo
-        #install Heroku CLI
-        #Do Heroku login
-        #Add git remote for heroku
-        #git push heroku main
+
+      #Login to ubuntu server
+      #cd /app/src/
+      #git pull
+      #systemctl restart api
+      - name: deploy to ubuntu server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PROD_HOST}}
+          username: ${{ secrets.PROD_USERNAME }}
+          password: ${{ secrets.PROD_PASSWORD }}
+          script: |
+            cd home/fastapi/fastapi-app/src
+            git pull
+            sudo systemctl restart api

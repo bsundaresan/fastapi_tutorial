@@ -38,5 +38,5 @@ app.include_router(votes.router)
 def home():
     
     return {
-        "message": "Welcome to my API! Successfully deployed CI/CD pipeline"
+        "message": "Welcome to my API! Successfully deployed to Ubuntu"
         }
