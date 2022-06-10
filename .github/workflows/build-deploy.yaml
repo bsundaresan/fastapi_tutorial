@@ -108,7 +108,6 @@ jobs:
           # password: ${{ secrets.PROD_PASSWORD }}
           key: ${{ secrets.PROD_KEY }}
           script: |
-            echo ${{ secrets.PROD_PASSWORD }} | su -S - fastapi 
             cd home/fastapi/fastapi-app/src
             git pull
             echo ${{ secrets.PROD_PASSWORD }} | sudo -S systemctl restart api
